@@ -22,8 +22,8 @@ public class Team {
 	 * @param team - JSON Object of the team you want this object to be.
 	 * @throws IOException 
 	 */
-	public Team(int teamID) throws IOException {
-	    String s = "https://api.overwatchleague.com/team/"+Integer.toString(teamID);
+	public Team(int teamId) throws IOException {
+	    String s = "https://api.overwatchleague.com/team/"+Integer.toString(teamId);
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
 	    String str = new String();
@@ -32,10 +32,11 @@ public class Team {
 	    scan.close();
 		JSONObject team = new JSONObject(str);
 		name = team.getString("name");
-		id=teamID;
+		id=teamId;
+		homeLocation = team.getString("homeLocation");
 		JSONArray thePlayers = team.getJSONArray("players");
 		for(int i = 0; i < thePlayers.length(); i++) {
-			JSONObject player = thePlayers.optJSONObject(i);
+			JSONObject player = thePlayers.getJSONObject(i);
 			int playerId = player.getInt("id");
 			players.add(new Player(playerId));
 		}
