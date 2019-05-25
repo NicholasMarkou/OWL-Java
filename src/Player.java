@@ -63,8 +63,8 @@ public class Player {
 				ult = playerStats.getDouble("ultimates_earned_avg_per_10m");
 				fBlows = playerStats.getDouble("final_blows_avg_per_10m");
 				time = playerStats.getDouble("time_played_total");
+				break;
 			}
-			break;
 		}
 	}
 	
@@ -106,5 +106,13 @@ public class Player {
 	}
 	public double getTime() {
 		return time;
+	}
+	public boolean equals(Player player) {
+		if (player.getName().equals(name)) return true;
+		return false;
+	}
+	@Override
+	public String toString() {
+		return name;
 	}
 }
