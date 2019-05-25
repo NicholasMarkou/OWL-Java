@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -24,6 +25,7 @@ public class Player {
 	private double ult;
 	private double fBlows;
 	private double time;
+	private ArrayList<String> accounts = new ArrayList<String>();
 	
 	/**
 	 * Constructor - creates player class and creates variables by using players ID.
@@ -66,8 +68,14 @@ public class Player {
 				break;
 			}
 		}
+		JSONArray JSONAccount = player.getJSONArray("accounts");
+		for (int i=0;i<JSONAccount.length();i++) {
+			accounts.add(JSONAccount.getJSONObject(i).getString("value"));
+		}
 	}
-	
+	public ArrayList<String> getAccounts() {
+		return accounts;
+	}
 	public int getId() {
 		return id;
 	}

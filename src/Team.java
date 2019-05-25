@@ -17,6 +17,10 @@ public class Team {
 	private int id;
 	private String homeLocation;
 	private ArrayList<Player> players = new ArrayList<Player>();
+	private String primaryColor;
+	private String secondaryColor;
+	private ArrayList<String> accounts = new ArrayList<String>();
+	
 	/**
 	 * Constructor - sets all values as local variables. 
 	 * @param team - JSON Object of the team you want this object to be.
@@ -34,11 +38,17 @@ public class Team {
 		name = team.getString("name");
 		id=teamId;
 		homeLocation = team.getString("homeLocation");
+		primaryColor = team.getString("primaryColor");
+		secondaryColor = team.getString("secondaryColor");
 		JSONArray thePlayers = team.getJSONArray("players");
 		for(int i = 0; i < thePlayers.length(); i++) {
 			JSONObject player = thePlayers.getJSONObject(i);
 			int playerId = player.getInt("id");
 			players.add(new Player(playerId));
+		}
+		JSONArray JSONAccount = team.getJSONArray("accounts");
+		for (int i=0;i<JSONAccount.length();i++) {
+			accounts.add(JSONAccount.getJSONObject(i).getString("value"));
 		}
 	}
 	/**
@@ -47,6 +57,9 @@ public class Team {
 	 */
 	public String getName() {
 		return name;
+	}
+	public ArrayList<String> getAccounts() {
+		return accounts;
 	}
 	/**
 	 * 

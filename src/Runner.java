@@ -11,6 +11,8 @@ public class Runner {
 		for (Player i:players) {
 			System.out.println(i.getName());
 			System.out.println("Eliminations/10m: "+i.getElim());
+			ArrayList<String> acc = i.getAccounts();
+			for (String k:acc) System.out.println(k);
 		}
 		
 	}
