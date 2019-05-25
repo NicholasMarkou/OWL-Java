@@ -51,6 +51,70 @@ public class Team {
 			accounts.add(JSONAccount.getJSONObject(i).getString("value"));
 		}
 	}
+	public Team (JSONObject team) throws IOException {
+		name = team.getString("name");
+		id=team.getInt("id");
+		homeLocation = team.getString("homeLocation");
+		primaryColor = team.getString("primaryColor");
+		secondaryColor = team.getString("secondaryColor");
+		JSONArray thePlayers = team.getJSONArray("players");
+		for(int i = 0; i < thePlayers.length(); i++) {
+			JSONObject player = thePlayers.getJSONObject(i).getJSONObject("player");
+			players.add(new Player(player));
+		}
+	    String s = "https://api.overwatchleague.com/team/"+Integer.toString(id);
+	    URL url = new URL(s);
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = new String();
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+		team = new JSONObject(str);
+		JSONArray JSONAccount = team.getJSONArray("accounts");
+		for (int i=0;i<JSONAccount.length();i++) {
+			accounts.add(JSONAccount.getJSONObject(i).getString("value"));
+		}
+	}
+	/**
+	 * Finds a random OWL team in the API.
+	 * @return
+	 * @throws IOException
+	 */
+	public static Team getRandomTeam() throws IOException {
+	    String s = "https://api.overwatchleague.com/teams";
+	    URL url = new URL(s);
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = new String();
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+	    JSONArray teamList = new JSONObject(str).getJSONArray("competitors");
+	    int num = (int)(Math.random()*teamList.length());
+	    return new Team(teamList.getJSONObject(num).getJSONObject("competitor"));	
+	}
+	/**
+	 * DO NOT USE THIS A LOT 
+	 * YOU CAN GET BLOCKED FROM THE API
+	 * WITH TO MUCH USE!!
+	 * Creates an ArrayList of each team in the OWL.
+	 * @return teams - each team in the OWL
+	 * @throws IOException
+	 */
+	public static ArrayList<Team> getAllTeams() throws IOException {
+	    String s = "https://api.overwatchleague.com/teams";
+	    URL url = new URL(s);
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = new String();
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+	    ArrayList<Team> teams = new ArrayList<Team>();
+	    JSONArray teamList = new JSONObject(str).getJSONArray("competitors");
+	    for (int i=0;i<teamList.length();i++) {
+	    	teams.add(new Team(teamList.getJSONObject(i).getJSONObject("competitor")));
+	    }
+	    return teams;
+	}
 	/**
 	 * 
 	 * @return name
@@ -77,5 +141,9 @@ public class Team {
 	}
 	public ArrayList<Player> getPlayers() {
 		return players;
+	}
+	@Override
+	public String toString() {
+		return name;
 	}
 }
