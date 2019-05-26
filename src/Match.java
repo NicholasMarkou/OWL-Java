@@ -50,7 +50,7 @@ public class Match {
 	    if (match.has("games")) {
 		    for (int i=0;i<match.getJSONArray("games").length();i++) {
 		    	games.add(new Game(match.getJSONArray("games").getJSONObject(i)));
-		    }	
+		    }
 	    }
 	}
 	public ArrayList<Game> getGames() {

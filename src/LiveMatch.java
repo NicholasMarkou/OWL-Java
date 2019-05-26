@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 import org.json.JSONObject;
 
@@ -9,6 +10,8 @@ public class LiveMatch {
 	private Team team2;
 	private int score1;
 	private int score2;
+	private int startDate;
+	private ArrayList<Game> games = new ArrayList<Game>();
 	
 	public LiveMatch() throws IOException {
 	    String s = "https://api.overwatchleague.com/live-match";
@@ -24,6 +27,11 @@ public class LiveMatch {
 	    team2 = new Team(match.getJSONArray("competitors").getJSONObject(1).getInt("id"));
 	    score1 = match.getJSONArray("scores").getJSONObject(0).getInt("value");
 	    score2 = match.getJSONArray("scores").getJSONObject(1).getInt("value");
+	    if (match.has("games")) {
+		    for (int i=0;i<match.getJSONArray("games").length();i++) {
+		    	games.add(new Game(match.getJSONArray("games").getJSONObject(i)));
+		    }
+	    }
 	}
 	public Team getTeam1() {
 		return team1;
