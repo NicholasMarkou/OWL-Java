@@ -48,4 +48,10 @@ public class LiveMatch {
 	public int getId() {
 		return id;
 	}
+	public ArrayList<Game> getGames() {
+		return games;
+	}
+	public String toString() {
+		return team1+" V. "+team2;
+	}
 }
