@@ -65,8 +65,8 @@ public class Match {
 		return startDate;
 	}
 	/**
-	 * End date is in epoch, miliseconds. 
-	 * Divide by 1000 to get rid of miliseconds.
+	 * End date is in epoch, milliseconds. 
+	 * Divide by 1000 to get rid of milliseconds.
 	 * @return endDate - time the game is planned to end
 	 */
 	public int getEndDate() {
@@ -107,7 +107,6 @@ public class Match {
 		return team1+" V. "+team2;
 	}
 	public boolean equals(Match match) {
-		if (match.getId()==id) return true;
-		return false;
+		return match.getId()==id;
 	}
 }

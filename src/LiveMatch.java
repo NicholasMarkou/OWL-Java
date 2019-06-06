@@ -48,10 +48,17 @@ public class LiveMatch {
 	public int getId() {
 		return id;
 	}
+	public int getStartDate() {
+		return startDate;
+	}
 	public ArrayList<Game> getGames() {
 		return games;
 	}
+	@Override
 	public String toString() {
 		return team1+" V. "+team2;
+	}
+	public boolean equals(LiveMatch live) {
+		return id==live.getId();
 	}
 }

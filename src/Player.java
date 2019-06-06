@@ -77,7 +77,7 @@ public class Player {
 	public Player(JSONObject player) throws IOException {
 		id=player.getInt("id");
 	    name = player.getString("name");
-//	    Use .has() to avoid execption (some players dont have all these variables)
+//	    Use .has() to avoid exception (some players don't have all these variables)
 		if (player.has("homeLocation")) location = player.getString("homeLocation");
 		if (player.has("familyName")) familyName=player.getString("familyName");
 		if (player.has("givenName")) givenName=player.getString("givenName");
@@ -204,8 +204,7 @@ public class Player {
 		return time;
 	}
 	public boolean equals(Player player) {
-		if (player.getName().equals(name)) return true;
-		return false;
+		return player.getName().equals(name);
 	}
 	@Override
 	public String toString() {
