@@ -1,14 +1,12 @@
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
-
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Represents a Game inside a Match. 
- * @author nMM456
+ * @author Nicholas Markou
  *
  */
 public class Game {

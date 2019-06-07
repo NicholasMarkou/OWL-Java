@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import org.json.JSONObject;
 import org.json.JSONArray;
-import org.json.*;
 
 /**
  * Team Object in the Overwatch League
  * Taken from the Overwatch League API.
- * @author nMM456
+ * @author Nicholas Markou
  *
  */
 public class Team {
@@ -30,7 +29,7 @@ public class Team {
 	    String s = "https://api.overwatchleague.com/team/"+Integer.toString(teamId);
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
-	    String str = new String();
+	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
 	    scan.close();
@@ -65,7 +64,7 @@ public class Team {
 	    String s = "https://api.overwatchleague.com/team/"+Integer.toString(id);
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
-	    String str = new String();
+	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
 	    scan.close();
@@ -84,7 +83,7 @@ public class Team {
 	    String s = "https://api.overwatchleague.com/teams";
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
-	    String str = new String();
+	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
 	    scan.close();
@@ -104,7 +103,7 @@ public class Team {
 	    String s = "https://api.overwatchleague.com/teams";
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
-	    String str = new String();
+	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
 	    scan.close();
@@ -121,6 +120,12 @@ public class Team {
 	 */
 	public String getName() {
 		return name;
+	}
+	public String getPrimaryColor() {
+		return primaryColor;
+	}
+	public String getSecondaryColor() {
+		return secondaryColor;
 	}
 	public ArrayList<String> getAccounts() {
 		return accounts;

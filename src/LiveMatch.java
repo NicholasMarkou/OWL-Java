@@ -3,21 +3,30 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 import org.json.JSONObject;
-
+/**
+ * Represents a Live Match in the Overwatch League.
+ * Shows the current score, match id, teams playing, when it started.
+ * @author Nicholas Markou
+ *
+ */
 public class LiveMatch {
 	private int id;
+//	the score of team1 is score1, the score of team2 is score2.
 	private Team team1;
 	private Team team2;
 	private int score1;
 	private int score2;
-	private String startDate;
+	private int startDate;
 	private ArrayList<Game> games = new ArrayList<Game>();
-	
+	/**
+	 * Gets the data for the current game. 
+	 * @throws IOException
+	 */
 	public LiveMatch() throws IOException {
 	    String s = "https://api.overwatchleague.com/live-match";
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
-	    String str = new String();
+	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
 	    scan.close();
@@ -33,9 +42,17 @@ public class LiveMatch {
 		    }
 	    }
 	}
+	/**
+	 * returns the first team.
+	 * @return
+	 */
 	public Team getTeam1() {
 		return team1;
 	}
+	/**
+	 * gets the second team
+	 * @return team2 - second team
+	 */
 	public Team getTeam2() {
 		return team2;
 	}
@@ -48,7 +65,7 @@ public class LiveMatch {
 	public int getId() {
 		return id;
 	}
-	public String getStartDate() {
+	public int getStartDate() {
 		return startDate;
 	}
 	public ArrayList<Game> getGames() {

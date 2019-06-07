@@ -1,8 +1,15 @@
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Runner {
-
+public class LiveMatchRunner {
+	/**
+	 * This will only run if there is an Overwatch League match going on.
+	 * There is usually one starting on Thursday nights until Sunday.
+	 * The data for the next game is usually loaded in as soon as the next game 
+	 * is over unless it is Sunday where you usually need to wait until Thursday.
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		LiveMatch live = new LiveMatch();

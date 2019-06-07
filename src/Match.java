@@ -8,7 +8,7 @@ import org.json.JSONObject;
 /**
  * Represents a match in the Overwatch League
  * https://api.overwatchleague.com/match/id
- * @author nMM456
+ * @author Nicholas Markou
  *
  */
 public class Match {
@@ -27,7 +27,7 @@ public class Match {
 		String s = "https://api.overwatchleague.com/match/"+Integer.toString(matchId);
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
-	    String str = new String();
+	    String str = "";
 	    while (scan.hasNext())
 	        str += scan.nextLine();
 	    scan.close();
