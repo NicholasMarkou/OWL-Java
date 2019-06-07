@@ -16,7 +16,7 @@ public class LiveMatch {
 	private Team team2;
 	private int score1;
 	private int score2;
-	private int startDate;
+	private long startDate;
 	private ArrayList<Game> games = new ArrayList<Game>();
 	/**
 	 * Gets the data for the current game. 
@@ -32,6 +32,7 @@ public class LiveMatch {
 	    scan.close();
 	    JSONObject match = new JSONObject(str).getJSONObject("data").getJSONObject("liveMatch");
 	    id = match.getInt("id");
+	    startDate = match.getLong("startDateTS");
 	    team1 = new Team(match.getJSONArray("competitors").getJSONObject(0).getInt("id"));
 	    team2 = new Team(match.getJSONArray("competitors").getJSONObject(1).getInt("id"));
 	    score1 = match.getJSONArray("scores").getJSONObject(0).getInt("value");
@@ -65,7 +66,7 @@ public class LiveMatch {
 	public int getId() {
 		return id;
 	}
-	public int getStartDate() {
+	public long getStartDate() {
 		return startDate;
 	}
 	public ArrayList<Game> getGames() {

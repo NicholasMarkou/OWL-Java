@@ -18,8 +18,8 @@ public class Match {
 	private int score1;
 	private int score2;
 	private String state;
-	private int startDate;
-	private int endDate;
+	private long startDate;
+	private long endDate;
 	private Team winner;
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
@@ -38,8 +38,10 @@ public class Match {
 	    score1 = match.getJSONArray("scores").getJSONObject(0).getInt("value");
 	    score2 = match.getJSONArray("scores").getJSONObject(1).getInt("value");
 	    state = match.getString("state");
-	    startDate = match.getInt("startDate");
-	    endDate = match.getInt("endDate");
+	    if (match.has("actualStartDate")) startDate = match.getLong("actualStartDate");
+	    else startDate = match.getLong("startDate");
+	    if (match.has("actualEndDate")) endDate = match.getLong("actualEndDate");
+	    else endDate = match.getLong("endDate");
 //	    Winner points to one of the 2 teams depending on who won.
 //	    If the match has not happened yet, it sets winner to null.
 	    if (!(match.has("winner"))) winner = null;
@@ -58,18 +60,18 @@ public class Match {
 	}
 	/**
 	 * Start date is in epoch, miliseconds. 
-	 * Divide by 1000 to get rid of miliseconds.
+	 * Used to find date.
 	 * @return startDate - time the game is planned to start
 	 */
-	public int getStartDate() {
+	public long getStartDate() {
 		return startDate;
 	}
 	/**
 	 * End date is in epoch, milliseconds. 
-	 * Divide by 1000 to get rid of milliseconds.
+	 * Used to find date.
 	 * @return endDate - time the game is planned to end
 	 */
-	public int getEndDate() {
+	public long getEndDate() {
 		return endDate;
 	}
 	

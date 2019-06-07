@@ -13,17 +13,26 @@ public class Game {
 	private int id;
 	private int points1;
 	private int points2;
+//	state determines if the game has not started, in progress or ended.
 	private String state;
 	private String map;
+//	guid is taken to find the name of the map
+//	map name is only shown after a game has concluded, however
+//	the guid is always given.
 	private String mapGuid;
 	private String mapType;
-	
+	/**
+	 * Created in a match object represents each round (map)
+	 * 4 - 5 games usually in a match.
+	 * @param game
+	 * @throws IOException
+	 */
 	public Game(JSONObject game) throws IOException {
 		id = game.getInt("id");
 		state = game.getString("state");
 		if (game.has("points")) points1 = game.getJSONArray("points").getInt(0);
 		if (game.has("points")) points2 = game.getJSONArray("points").getInt(1);
-		if (game.has("attributes") && game.getJSONObject("attributes").has("mapGuid") && 
+		if (game.getJSONObject("attributes").has("mapGuid") && 
 				!(game.getJSONObject("attributes").isNull("mapGuid"))) mapGuid = game.getJSONObject("attributes").getString("mapGuid");
 		else mapGuid = "Unknown";
 	    URL url = new URL("https://api.overwatchleague.com/maps");
