@@ -10,7 +10,7 @@ public class LiveMatch {
 	private Team team2;
 	private int score1;
 	private int score2;
-	private int startDate;
+	private String startDate;
 	private ArrayList<Game> games = new ArrayList<Game>();
 	
 	public LiveMatch() throws IOException {
@@ -48,7 +48,7 @@ public class LiveMatch {
 	public int getId() {
 		return id;
 	}
-	public int getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 	public ArrayList<Game> getGames() {

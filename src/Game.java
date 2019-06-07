@@ -1,3 +1,9 @@
+import java.io.IOException;
+import java.net.URL;
+import java.util.Scanner;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -9,20 +15,42 @@ public class Game {
 	private int id;
 	private int points1;
 	private int points2;
-	private String map;
 	private String state;
+	private String map;
+	private String mapGuid;
+	private String mapType;
 	
-	public Game(JSONObject game) {
+	public Game(JSONObject game) throws IOException {
 		id = game.getInt("id");
 		state = game.getString("state");
 		if (game.has("points")) points1 = game.getJSONArray("points").getInt(0);
 		if (game.has("points")) points2 = game.getJSONArray("points").getInt(1);
-		if (game.has("attributes") && game.getJSONObject("attributes").has("map") && 
-				!(game.getJSONObject("attributes").isNull("map"))) map = game.getJSONObject("attributes").getString("map");
-		else map = "Unknown Map";
+		if (game.has("attributes") && game.getJSONObject("attributes").has("mapGuid") && 
+				!(game.getJSONObject("attributes").isNull("mapGuid"))) mapGuid = game.getJSONObject("attributes").getString("mapGuid");
+		else mapGuid = "Unknown";
+	    URL url = new URL("https://api.overwatchleague.com/maps");
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = "";
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+	    JSONArray maps = new JSONArray(str);
+	    for (int i=0;i<maps.length();i++) {
+	    	JSONObject mapJ = maps.getJSONObject(i);
+	    	if (mapJ.getString("guid").equals(mapGuid)) {
+	    		map = mapJ.getJSONObject("name").getString("en_US");
+	    		mapType = mapJ.getString("type");
+	    	}
+	    }
 	}
 	public int getId() {
 		return id;
+	}
+	public String getGuid() {
+		return mapGuid;
+	}
+	public String getMapType() {
+		return mapType;
 	}
 	public int getPoints1() {
 		return points1;
