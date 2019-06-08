@@ -14,7 +14,7 @@ public class LiveMatchRunner {
 	 */
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		LiveMatch live = new LiveMatch();
+		Match live = new Match(true);
 		System.out.println(live);
 		System.out.println(live.getScore1()+" : "+live.getScore2());
 		Date date = new Date(live.getStartDate());

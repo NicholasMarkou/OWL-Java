@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import org.json.JSONObject;
 
 /**
@@ -54,6 +53,29 @@ public class Match {
 		    	games.add(new Game(match.getJSONArray("games").getJSONObject(i)));
 		    }
 	    }
+	}
+	/**
+	 * Use this constructor to access the live match.
+	 * https://api.overwatchleague.com/live-match
+	 * @throws IOException 
+	 * @throws JSONException 
+	 */
+	public Match(boolean live) throws IOException {
+		this(liveMatch());
+	}
+	/**
+	 * Gets id for the live match to run through the constructor.
+	 * @return
+	 * @throws IOException
+	 */
+	private static int liveMatch() throws IOException {
+	    URL url = new URL("https://api.overwatchleague.com/live-match");
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = "";
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+	    return new JSONObject(str).getJSONObject("data").getJSONObject("liveMatch").getInt("id");
 	}
 	public ArrayList<Game> getGames() {
 		return games;
