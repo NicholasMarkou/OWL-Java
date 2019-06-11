@@ -8,6 +8,8 @@ import org.json.JSONObject;
 
 /**
  * Represents a player for a team.
+ * Holds data from the API for a specific player.
+ * Put in a player id in the constructor to choose a player
  * @author Nicholas Markou
  *
  */
@@ -156,9 +158,9 @@ public class Player {
 	    return new Player(playerList.getJSONObject(num));		
 	}
 	/**
-	 * DO NOT USE THIS METHOD FREQUENTLY! 
-	 * IT MAKES A LOT OF REQUESTS TO THE API.
-	 * IF USED TO MUCH YOU MIGHT GET BLOCKED FOR SOME TIME!
+	 * Gets all players in the Overwatch League
+	 * Returns an ArrayList containing Player objects 
+	 * for each player in the league.
 	 * @return players - ArrayList of every player in the API.
 	 * @throws IOException
 	 */

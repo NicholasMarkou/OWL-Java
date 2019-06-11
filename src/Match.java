@@ -12,16 +12,26 @@ import org.json.JSONObject;
  */
 public class Match {
 	private int id;
+//	team1's score is under score1.
+//	team2's score is under score2.
 	private Team team1;
 	private Team team2;
 	private int score1;
 	private int score2;
+//	State is if the game hasn't begun, is being played or has concluded.
 	private String state;
+//	startDate and endDate are in epoch time
 	private long startDate;
 	private long endDate;
 	private Team winner;
 	private ArrayList<Game> games = new ArrayList<Game>();
-	
+	/**
+	 * This takes an id from the Overwatch league and creates a match object
+	 * with the data it gets from the api. 
+	 * https://api.overwatchleague.com/match/id
+	 * @param matchId - id for a match in the Overwatch League
+	 * @throws IOException
+	 */
 	public Match(int matchId) throws IOException {
 		String s = "https://api.overwatchleague.com/match/"+Integer.toString(matchId);
 	    URL url = new URL(s);
@@ -83,7 +93,7 @@ public class Match {
 	/**
 	 * Start date is in epoch, miliseconds. 
 	 * Used to find date.
-	 * @return startDate - time the game is planned to start
+	 * @return startDate - time the game is planned to start or started
 	 */
 	public long getStartDate() {
 		return startDate;
@@ -91,7 +101,7 @@ public class Match {
 	/**
 	 * End date is in epoch, milliseconds. 
 	 * Used to find date.
-	 * @return endDate - time the game is planned to end
+	 * @return endDate - time the game is planned to end or ended
 	 */
 	public long getEndDate() {
 		return endDate;

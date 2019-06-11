@@ -50,6 +50,12 @@ public class Team {
 			accounts.add(JSONAccount.getJSONObject(i).getString("value"));
 		}
 	}
+	/**
+	 * Creates a team object like above
+	 * Uses a JSONObject instead of the id. 
+	 * @param team
+	 * @throws IOException
+	 */
 	public Team (JSONObject team) throws IOException {
 		name = team.getString("name");
 		id=team.getInt("id");
@@ -92,11 +98,8 @@ public class Team {
 	    return new Team(teamList.getJSONObject(num).getJSONObject("competitor"));	
 	}
 	/**
-	 * DO NOT USE THIS A LOT 
-	 * YOU CAN GET BLOCKED FROM THE API
-	 * WITH TO MUCH USE!!
-	 * Creates an ArrayList of each team in the OWL.
-	 * @return teams - each team in the OWL
+	 * Creates an ArrayList containing each team in the Overwatch League
+	 * @return teams - each team in the Overwatch League
 	 * @throws IOException
 	 */
 	public static ArrayList<Team> getAllTeams() throws IOException {

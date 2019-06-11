@@ -5,7 +5,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Represents a Game inside a Match. 
+ * Represents a Game inside a Match.
+ * There are usually 4-5 games in a match.
  * @author Nicholas Markou
  *
  */
