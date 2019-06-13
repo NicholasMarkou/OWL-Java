@@ -72,6 +72,9 @@ public class Game {
 	public String getState() {
 		return state;
 	}
+	public boolean equals(Game game) {
+		return game.getId()==id;
+	}
 	@Override
 	public String toString() {
 		return map;
