@@ -73,6 +73,18 @@ public class Match {
 	public Match(boolean live) throws IOException {
 		this(liveMatch());
 	}
+	public Match (String next) throws IOException {
+		this(nextMatch());
+	}
+	private static int nextMatch() throws IOException {
+	    URL url = new URL("https://api.overwatchleague.com/live-match");
+	    Scanner scan = new Scanner(url.openStream());
+	    String str = "";
+	    while (scan.hasNext())
+	        str += scan.nextLine();
+	    scan.close();
+	    return new JSONObject(str).getJSONObject("data").getJSONObject("nextMatch").getInt("id");
+	}
 	/**
 	 * Gets id for the live match to run through the constructor.
 	 * @return
