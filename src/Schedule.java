@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Find info from a schedule.
- * @author Nicholas
+ * @author nMM456
  *
  */
 public class Schedule {
@@ -17,8 +18,8 @@ public class Schedule {
 	private String endDate;
 	private JSONObject g;
 	
-	public Schedule() throws IOException {
-	    String s = "https://api.overwatchleague.com/schedule";
+	public Schedule(String season) throws IOException {
+	    String s = "https://api.overwatchleague.com/schedule?season="+season;
 	    URL url = new URL(s);
 	    Scanner scan = new Scanner(url.openStream());
 	    String str = "";
@@ -30,19 +31,28 @@ public class Schedule {
 	    startDate = g.getString("startDate");
 	    endDate = g.getString("endDate");
 	}
-	public Match findMatch(int id1, int id2) {
+	public Schedule() throws IOException {
+		this("");
+	}
+	public ArrayList<Match> findMatches(int id1, int id2) throws IOException {
 		JSONArray stages = g.getJSONArray("stages");
 		ArrayList<Match> matches = new ArrayList<Match>();
 		for (int i=0;i<stages.length();i++) {
-			JSONArray matches = stages.getJSONObject(i).getJSONArray("matches");
-			for (int k=0;k<matches.length();k++) {
-				int mid1 = matches.getJSONObject(k).getJSONArray("competitors").getJSONObject(0).getInt("id");
-				int mid2 = matches.getJSONObject(k).getJSONArray("competitors").getJSONObject(1).getInt("id");
-				if (mid1==id1) {
-					if (mid2==id2) 
+			JSONArray matchJSON = stages.getJSONObject(i).getJSONArray("matches");
+			for (int k=0;k<matchJSON.length();k++) {
+				if (!(matchJSON.getJSONObject(k).getJSONArray("competitors").isNull(0))) {
+					int mid1 = matchJSON.getJSONObject(k).getJSONArray("competitors").getJSONObject(0).getInt("id");
+					int mid2 = matchJSON.getJSONObject(k).getJSONArray("competitors").getJSONObject(1).getInt("id");
+					if (mid1==id1) {
+						if (mid2==id2) matches.add(new Match(matchJSON.getJSONObject(k).getInt("id")));
+					}
+					if (mid1==id2) {
+						if (mid2==id1) matches.add(new Match(matchJSON.getJSONObject(k).getInt("id")));
+					}
 				}
 			}
 		}
+		return matches;
 	}
 	public int getId() {
 		return id;

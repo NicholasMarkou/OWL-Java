@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Example of a team
  * team id 4402 is the Boston Uprising.
- * @author Nicholas Markou
+ * @author nMM456
  *
  */
 public class TeamRunner {

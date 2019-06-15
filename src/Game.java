@@ -7,7 +7,7 @@ import org.json.JSONObject;
 /**
  * Represents a Game inside a Match.
  * There are usually 4-5 games in a match.
- * @author Nicholas Markou
+ * @author nMM456
  *
  */
 public class Game {
@@ -33,7 +33,11 @@ public class Game {
 		state = game.getString("state");
 		if (game.has("points")) points1 = game.getJSONArray("points").getInt(0);
 		if (game.has("points")) points2 = game.getJSONArray("points").getInt(1);
-		if (game.getJSONObject("attributes").has("mapGuid") && 
+		if ((game.getJSONObject("attributes").has("map")) && !(game.getJSONObject("attributes").isNull("map"))) {
+			map=game.getJSONObject("attributes").getString("map");
+			if (game.getJSONObject("attributes").has("mapGuid")) mapGuid=game.getJSONObject("attributes").getString("mapGuid");
+		}
+		else if (game.getJSONObject("attributes").has("mapGuid") && 
 				!(game.getJSONObject("attributes").isNull("mapGuid"))) mapGuid = game.getJSONObject("attributes").getString("mapGuid");
 		else mapGuid = "Unknown";
 	    URL url = new URL("https://api.overwatchleague.com/maps");
@@ -45,8 +49,9 @@ public class Game {
 	    JSONArray maps = new JSONArray(str);
 	    for (int i=0;i<maps.length();i++) {
 	    	JSONObject mapJ = maps.getJSONObject(i);
-	    	if (mapJ.getString("guid").equals(mapGuid)) {
+	    	if (mapJ.getString("guid").equals(mapGuid) || mapJ.getString("id").equals(map)) {
 	    		map = mapJ.getJSONObject("name").getString("en_US");
+	    		mapGuid = mapJ.getString("guid");
 	    		mapType = mapJ.getString("type");
 	    	}
 	    }

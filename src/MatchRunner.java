@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Example of a past match, loaded by the id.
- * @author Nicholas Markou
+ * @author nMM456
  *
  */
 public class MatchRunner {

@@ -8,7 +8,7 @@ import org.json.JSONArray;
 /**
  * Team Object in the Overwatch League
  * Taken from the Overwatch League API.
- * @author Nicholas Markou
+ * @author nMM456
  *
  */
 public class Team {

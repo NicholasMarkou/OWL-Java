@@ -2,7 +2,7 @@ import java.io.IOException;
 
 /**
  * Gets a random player and prints info about them.
- * @author Nicholas Markou
+ * @author nMM456
  *
  */
 public class PlayerRunner {

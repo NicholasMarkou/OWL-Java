@@ -7,7 +7,7 @@ import org.json.JSONObject;
 /**
  * Represents a match in the Overwatch League
  * https://api.overwatchleague.com/match/id
- * @author Nicholas Markou
+ * @author nMM456
  *
  */
 public class Match {

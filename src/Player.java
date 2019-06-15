@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * Represents a player for a team.
  * Holds data from the API for a specific player.
  * Put in a player id in the constructor to choose a player
- * @author Nicholas Markou
+ * @author nMM456
  *
  */
 public class Player {
